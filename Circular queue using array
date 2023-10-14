@@ -1,0 +1,101 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define max 5
+int front =  -1;
+int rear = -1;
+int a[max]; 
+void enqueue();
+void dequeue();
+void display();
+void peek();
+void main()
+{
+	int k;
+	while(1)
+	{
+		printf("enter your option ");
+		printf("\n 1.enqueue\n2.dequeue\n3.dispaly\n4.peek");
+		scanf("%d",&k);
+		switch(k)
+		{
+			case 1: printf("\ninsertion");
+				enqueue();
+				break;
+			case 2:printf("\ndeletion ");
+			       dequeue();
+			       break;
+			case 3 :printf("\nthe elements in the list : ");
+			       display();
+			       break;
+		        case 4 : printf("\n the top element :" );
+		                peek();
+		                break;
+		}
+	}
+}
+void enqueue()
+{
+	int x;
+	printf("\nenter the value to insert ");
+	scanf("%d",&x);
+		front = rear = 0;
+		a[rear] = x;
+	}
+	else if((rear+1)%max == front)
+	{
+		printf("\nqueue is full ");
+	}
+	else
+	{
+		rear = (rear+1)%max;
+		a[rear] = x;
+	}
+	printf("the elements are :");
+	display();
+}
+void dequeue()
+{
+	if(front==-1&&rear==-1)
+		printf("\nlist is empty");
+	else if(front == rear)
+	{
+		printf("\nthe data deleted is %d",a[front]);
+		front = rear = -1;
+	}
+	else 
+	{
+		printf("\nthe data deleted is %d ",a[front]);
+	        front = (front+1)%max ;
+	}
+	printf("the list is :");
+	display();
+}
+void display()
+{
+	int i= front;
+	if(front==-1&&rear==-1)
+	printf("list is empty");
+	else
+	{
+		while(i!= rear)
+		{
+			printf("%d",a[i]);
+			i = (i+1)%max;
+		}
+		printf("%d",a[rear]);
+	}
+}
+void peek()
+{
+	if(front==-1&&rear==-1)
+		printf("\nlist is empty ");
+	else
+	{
+		printf("%d",a[front]);
+	}
+	printf("the elemets are :");
+	display();
+}
+
+
+
