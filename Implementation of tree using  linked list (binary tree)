@@ -1,0 +1,93 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct node
+{
+	int key;
+	struct node *left,*right;
+}node;
+node *root = NULL;
+node * getnode()
+{
+	node * new = (node*)malloc(sizeof(node));
+	printf("\nenter key value : ");
+	scanf("%d",&new->key);
+	new->left = NULL;
+	new->right= NULL;
+	return new;
+}
+void insert_root()
+{
+	node * new = getnode();
+	if(root==NULL)
+	{
+		root = new;
+	}
+}
+void insert_left(node *root)
+{
+	node *new = getnode();
+	if(root->left==NULL)
+		root->left = new;
+}
+void insert_right(node*root)
+{
+	node *new = getnode();
+	if(root->right==NULL)
+		root->right = new;
+}
+void preorder(node *root)
+{
+	if(root==NULL)
+		return -1;
+	else
+	{
+		printf("%d",root->key);
+		preorder(root->left);
+		preorder(root->right);
+	}
+}
+void inorder(node *root)
+{
+	if(root == NULL)
+		return -1;
+	else
+	{
+		inorder(root->left);
+		printf("%3d",root->key);
+		inorder(root->right);
+	}
+}
+void postorder(node *root)
+{
+	if(root ==NULL)
+		return -1;
+	else
+	{
+		postorder(root->left);
+		postorder(root->right);
+		printf("%3d",root->key);
+	}
+}
+	
+			
+int main()
+{
+	insert_root();
+	insert_left(root);
+	insert_right(root);
+	insert_left(root->left);
+	insert_right(root->left);
+	insert_left(root->right);
+	insert_right(root->right);
+	printf("preorder of tree is ");
+	preorder(root);
+	printf("postorder of tree is ");
+	postorder(root);
+	printf("inoder of tree is ");
+	inorder(root);
+	return 0;
+}
+
+		
+
+			
