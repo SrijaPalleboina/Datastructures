@@ -1,0 +1,119 @@
+#include <stdio.h>
+#include<stdlib.h>
+typedef struct node
+{
+    int data;
+    struct node*next;
+}node;
+node * head = NULL;
+node *temp ;
+node *getnode()
+{
+    node *new = (node*)malloc(sizeof(node));
+    printf("Enter the data");
+    scanf("%d",&new->data);
+    new->next = NULL;
+    return new;
+}
+void insert_beg()
+{
+    node * new = getnode();
+    new->next = head;
+    head = new;
+}
+void insert_end()
+{
+    node *new = getnode();
+    if(head==NULL)
+    head = temp = new;
+    else
+    {
+        temp->next=new;
+        temp = new;
+    }
+}
+void insert_pos()
+{
+    node *new=getnode();
+    int k,n;
+    node *curr;
+    n = length();
+    if(k==1)
+    insert_beg();
+    if(k==n)
+    insert_end();
+    else if(k>1&&k<n)
+    for(int i = 1;i<k-1;i++)
+    {
+        curr = curr->next;
+    }
+    new->next = curr->next;
+    curr->next = new;
+}
+int length()
+{
+    
+    int count = 0;
+    temp = head;
+    while(temp!=0)
+    {
+        count++;
+        temp = temp->next;
+    } 
+    printf("%d",count);
+    return count;
+}
+void display()
+{
+    node *curr1 =head;
+    if(head == NULL)
+    printf("no nodes");
+    else
+    {
+      while(curr1!=NULL)
+      {
+        curr1 = curr1->next;
+        printf("%3d",curr1->data);
+      }
+    }
+}
+int main()
+{
+    int a;
+    while(1)
+    {
+        printf("\n1.insert at beg\n2.insert at end\n3.insert at position \n4.length\n5.display");
+        printf("\nEnter the option");
+        scanf("%d",&a);
+        switch(a)
+        {
+            case 1: printf("the elmets in the node are : ");
+                     display();
+                     break;
+	        case 2: printf("insertion at beginnig: ");
+	                 insert_beg();
+	                 break;
+	        case 3: printf("insertion at end ");
+                     insert_end();
+                     break;
+            case 4: printf("insertion at position:");
+                     insert_pos();
+                     break;
+            case 5: if(head==NULL)
+                    printf("the list is empty:");
+                    else if(head->next==NULL)
+	                printf("the list has one node:");
+                    else
+	                length();
+	                break;
+	        case 6: exit(0);
+	                
+        }
+    }
+}
+
+
+
+
+
+
