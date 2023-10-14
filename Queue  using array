@@ -1,0 +1,83 @@
+#include <stdio.h>
+#include<stdlib.h>
+#define n 5
+void enqueue();
+void dequeue();
+void display();
+void peek();
+int a[n];
+int front = -1;
+int rear= -1;
+void main()
+{
+    int ch;
+    while(1)
+    {
+        printf("\n1.enqueue \n2. dequeue \n3.display\n 4. peek");
+        printf("\nenter your option");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+            case 1: printf("\ninsertion");
+                    enqueue();
+                    break;
+            case 2 : printf("\ndeletion");
+                     dequeue();
+                     break;
+            case 3 : printf("\ndisplay");
+                     display();
+                     break;
+            case 4: printf("\nthe front element is ");
+                    peek();
+                    break;
+        }
+    }
+}
+void enqueue()
+{
+    int x;
+    printf("enter the value of x");
+    scanf("%d",&x);
+    if(front==-1&&rear==-1)
+    {
+        front = rear =0;
+        a[rear] = x;
+    }
+    else if(rear == n-1)
+    printf("queue is overflow");
+    else
+    {
+        rear++;
+        a[rear] = x;
+    }
+}
+void peek()
+{
+    if(front==-1&&rear==-1)
+    printf("the list is empty");
+    else
+    printf("%3d",a[front]);
+}
+void dequeue()
+{
+    if(front==-1&&rear==-1)
+    printf("the queue is underflow");
+    else if(front == rear)
+    {
+        front = rear = -1;
+    }
+    else
+    {
+        printf("%3d",a[front]);
+        front++;
+    }
+}
+void display()
+{
+    int i ;
+    for(i= front;i<= rear;i++)
+    {
+        printf("%d",a[i]);
+    }
+}
+
