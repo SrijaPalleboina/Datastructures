@@ -1,0 +1,67 @@
+#include <stdio.h>
+#include<stdlib.h>
+type def struct node 
+{
+    int data;
+    struct node *next;
+}node;
+node *head =NULL;
+node *temp=NULL;
+node *getnoe();
+void display();
+void del_beg();
+void del_end();
+void del_atpos();
+void main()
+{
+    int a;
+    while(1)
+    {
+        printf("enter your option : ");
+        scanf("%d",&a);
+        switch(a)
+        {
+            case 1: printf("deletion at begging: ");
+                      del-beg();
+                      break;
+            case 2: printf("deletion at the end :");
+                      del_end();
+                      break;
+            case 3: printf("deletion at the k position : ");
+                     del_atpos();
+                     break;
+            case 4: printf("the elmets in the node are : ");
+                     display();
+                     break;
+            case 5: exit(0);
+                     break;
+        }
+    }
+    void del_beg()
+    {
+        node *temp1 = head;
+        if(head==NULL)
+        printf("list is  empty : ")
+        else if(head->next ==  NULL){
+        printf("data deleeted is %d",head->data);
+        head = NULL;
+        temp = NULL;
+        free(temp1)
+        }
+        else{
+            head = head->next;
+            free(temp1);
+        }
+        
+    }void del_end()
+    {
+     node *temp1 = head;
+     if(head==NULL)
+     printf("the list is empty");
+     else if (head->next==NULL)
+    }
+    
+        
+    
+
+
