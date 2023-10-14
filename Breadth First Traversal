@@ -1,0 +1,220 @@
+#include <stdio.h>
+#include<stdlib.h>
+typedef struct node{
+    int data;
+    struct node *next;
+}node;
+node*head = NULL;
+node *temp = NULL;
+node*getnode();
+void circular_insertbeg();
+void circular_insertend();
+void circular_insertatpos();
+void circular_delbeg();
+void circular_delend();
+void circular_delatpos();
+int length();
+void display();
+
+void main()
+{
+    int a;
+    while(1)
+    {
+        printf("\n 1.insert beg\n2.insert at end\n3.insert at position  ");
+        printf("\4.delete at beginning\n5.delete at end\n6.delete at position");
+        printf("\7.length of the list \n 8.display the nodes\n9.exit");
+        printf("enter your option :");
+        scanf("%d",&a);
+        switch(a)
+        {
+            case 1: printf("insertion at beginnig : ");
+                    circular_insertbeg();
+                    break;
+            case 2: printf("insertion at the end : ");
+                    circular_insertend();
+                    break;
+            case 3: printf("insertion at the postion : ");
+                    circular_insertatpos();
+                    break;
+            case 4: printf("deletion at beginng :");
+                    circular_delbeg();
+                    break;
+            case 5: printf("deletion at end : ");
+                    circular_delend();
+                    break;
+            case 6: printf("deletion at the position :");
+                    circular_delatpos();
+                    break;
+            case 7: printf("length of the list : ");
+                    if(head==0)
+                    printf("the list is empty :");
+                    else
+                    length();
+                    break;
+            case 8: printf("the elemnts in the node : ");
+                    display();
+                    break;
+            case 9: exit(0);
+                    break;
+                    
+        }
+    }
+}
+node *getnode()
+{
+    node * new;
+    new = (struct node*)malloc(sizeof(struct node));
+    printf("\n enter the data : ");
+    scanf("%d",&new->data);
+    new->next=NULL;
+    return new;
+}
+void circular_insertbeg()
+{
+    node* temp;
+ node * new = getnode();
+ if(head==NULL)
+ {
+     head = new;
+     head->next = head;
+     temp = head;
+ } 
+ else
+ {
+     new->next = head;
+     temp->next=new;
+     head = new;
+ }
+}
+void circular_insertend()
+{
+    node *new = getnode();
+    node *temp;
+    if(head==0)
+    {
+    head = new;
+    head->next=new;
+    temp = head;
+    } 
+    else
+    {
+        temp->next = new;
+        new->next = head;
+        temp = new;
+    }
+}
+void circular_insertatpos()
+{
+    node * new = getnode();
+    node *temp = head;
+    int pos,i,n;
+    printf("enter the position : ");
+    scanf("%d",&pos);
+    n=length();
+    if(pos==1)
+    circular_insertbeg();
+    if(pos==n)
+    circular_insertend();
+    else if(1<pos&&pos<n)
+    {
+        for(i=1;i<pos-1;i++)
+        {
+            temp= temp->next;
+        }
+        new->next=temp->next;
+        temp->next= new;
+    }
+    else
+    printf("invalid positon : ");
+}
+int length()
+{
+    int count =1;
+    node * temp = head;
+    while(temp->next!=head)
+    {
+        count++;
+        temp = temp->next;
+    }
+    printf("%d",count);
+    return count;
+}
+void display()
+{
+    node * temp = head;
+    if(temp==0)
+    printf("list is empty");
+    else
+    {
+        while(temp->next!=head)
+        {
+            printf("%3d",temp->data);
+            temp = temp->next;
+        }
+        printf("%3d",temp->data);
+    }
+}
+void  circular_delbeg()
+{
+    node *ptr = head;
+    if(head->next==head)
+    {
+    head = temp =NULL;
+    }else
+    {
+        temp->next = head ->next;
+        head = head ->next;
+    }
+    free(ptr);
+}
+void circular_delend()
+{
+    node *temp;
+    node *ptr=temp;
+    node *temp1= head;
+    if(head->next==head)
+    head = temp= NULL;
+    else
+    {
+        while(temp1->next!=temp)
+        {
+        temp1=temp1->next;
+        }
+     temp1->next = head;
+     temp =  temp1;
+    }
+    free(ptr);
+    
+}
+void circular_delatpos()
+{
+    node *temp;
+    node *curr = head;
+    int i;
+    int k,n;
+    printf("enter the positon to delete :");
+    scanf("%d",&k);
+    n = length();
+    if(k==1)
+    circular_delbeg();
+    if(k==n)
+    circular_delend();
+    else if(1<k && k<n)
+    {
+    for(i=1;i<k-1;i++)
+    {
+        curr = curr->next;
+        temp = curr->next;
+        curr->next= temp->next;
+        free(temp);
+    }
+    }
+    else
+    printf("invalid postion");
+}
+
+
+
+
+
