@@ -1,0 +1,107 @@
+#include <stdio.h>
+#include<stdlib.h>
+#define max 5
+int stack[max];
+int top = -1;
+void push();
+void pop();
+int isempty();
+int isfull();
+void length();
+void display();
+void peek();
+void main()
+{
+    int a;
+    while(1)
+    {
+        printf("enter your option");
+        scanf("%d",&a);
+        switch(a)
+        {
+            case 1 :printf("inserting the element");
+                    push();
+                    break;
+            case 2: printf("deleting the element");
+                    pop();
+                    break;
+            case 3: printf("length of stack array :");
+                    length();
+                    break;
+            case 4: printf("the display top most element");
+                    peek();
+                    break;
+            case 5: display();
+                    break;
+            case 6 : exit(0);
+                     break;
+        }
+    }
+}
+int isempty()
+{
+    if(top<0)
+    return 1;
+    else
+    return 0;
+}
+int isfull()
+{
+    if(top==max-1)
+    return 1;
+    else
+    return 0;
+}
+void push()
+{
+    int x;
+    printf("\n enter elements: ");
+    scanf("%d",&x);
+    if(isfull())
+    printf("overflow");
+    else
+    {
+        top++;
+        stack[top] = x;
+    }
+    display();
+}
+void pop()
+{
+    int x;
+    if(isempty())
+    printf("underflow");
+    else
+    {
+        x = stack[top];
+        top--;
+    }
+    display();
+}
+void peek()
+{
+    printf("top most element is %d",stack[top]);
+}
+void display()
+{
+    int i,count =0;
+    if(top>=0)
+    {
+        for(i=top;i>=0;i--)
+        printf("%d",stack[i]);
+        count++;
+    }
+}
+void length()
+{
+    int i,count = 0;
+    if(top>=0)
+    {
+        for(i=top;i>=0;i--)
+        {
+            count++;
+        }
+        printf("%d",count);
+    }
+}
+
