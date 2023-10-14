@@ -1,0 +1,98 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct node
+{
+	int data;
+	struct node *next;
+}node;
+node *front = 0;
+node *rear = 0;
+node *getnode();
+void dequeue();
+void enqueue();
+void display();
+void peek();
+void main()
+{
+	int a;
+	while(1)
+	{
+		printf("\n1.enqueue\n2.dequeue\n3.diplay\n4.peek");
+		printf("\nenter your option : ");
+		scanf("%d",&a);
+		switch(a)
+		{
+			case 1 : printf("\n insertion ");
+				 enqueue();
+				 break;
+		       case 2 : printf("\ndeletion");
+	                        dequeue();
+	                        break;
+	               case 3 : printf("the elements in the node are :");
+	                        display();
+	                        break;
+	                case 4 : printf("the top element is ");
+	                         peek();
+	                         break;
+		}
+	}
+}
+node *getnode()
+{
+	node *new = (node*)malloc(sizeof(node));
+	printf("enter the data :");
+	scanf("%d",&new->data);
+	new->next = NULL;
+	return new;
+}
+void enqueue()
+{
+	node *new = getnode();
+	if(front == 0 &&rear==0)
+	{
+		front = rear = new;
+	        rear->next = front;
+	}
+	else {
+		rear->next = new;
+		new ->next = front;
+		rear = new;
+	}
+}
+void dequeue()
+{
+	if(front==0&&rear==0)
+		printf("the list is empty ");
+	else if(front==rear)
+		printf("the deleted data is %d",front->data);
+	else
+	{       
+		printf("%d",front->data);
+		front = front->next;
+		rear->next = front;
+	}
+}
+void display()
+{      
+	node *temp = front;
+	if(front==0&&rear==0)
+		printf("list is empty");
+	else{
+		while(temp->next!=front)
+		{ 
+			printf("%4d",temp->data);
+			temp = temp->next;
+		}
+		printf("%d",front->data);
+	}
+}
+void peek()
+{
+	if(front==0&&rear==0)
+		printf("\nlist is empty");
+	else
+		printf("%d",front->data);
+}
+
+
+
