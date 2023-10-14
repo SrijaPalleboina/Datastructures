@@ -1,0 +1,121 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct node
+{
+	int data;
+	struct node *next;
+}node;
+node *head = NULL;
+node *top = NULL;
+node *getnode();
+void push();
+void pop();
+void peek();
+void display();
+void main()
+{
+
+        int a;
+        while(1)
+        {
+                printf("\n1.push 2.pop 3 .peek");
+                printf("\nenter your option :");
+                scanf("%d",&a);
+                switch(a)
+                {
+                        case 1: printf("\ninsertion using push function");
+                                push();
+                                break;
+                        case 2: printf("\ndeletion using pop:");
+                                pop();
+                                break;
+                        case 3: printf("\nprinting the top element using the peek function :");
+                                peek();
+                                break;
+                        case 4: printf("\nthe elements in the stack array:");
+                                display();
+                                break;
+                        case 5: exit(0);
+                                break;
+
+                }
+	}
+}
+node *getnode()
+{
+	node *new = (node*)malloc(sizeof(node));
+	printf("\nenter the data");
+	scanf("%d",&new->data);
+	new->next = NULL;
+	return new;
+}
+
+void push()
+{
+       
+	node *new =getnode();
+	if(head ==0)
+	{
+		head = new;
+		top = new;
+	}
+	else
+	{
+		top->next = new;
+		top = new;
+	}
+}
+void pop()
+{
+	int k ;
+	k = top->data;
+	node *temp=head;
+	if(head->next==NULL)
+	{
+		printf("the deleted data is %d",head->data);
+		free(temp);
+		head=NULL;
+	}
+	else if(head==0)
+	{
+		printf("the list is empty");
+	}
+	else
+	{       temp=head;
+          	while(temp->next!=top)
+	        {
+		  temp = temp->next;
+	        }
+		top=temp;
+		top->next=NULL;
+	temp = temp->next;
+	free(temp);
+	printf("the deleted data is %d",k);
+	}
+}
+void peek()
+{
+	int a;
+	a = top->data;
+	printf("the top element is %d",a);
+}
+void display()
+{
+	node *temp1= head;
+	if(head==0)
+	{
+		printf("list is empty");
+	}
+	else
+	{
+	while(temp1 != NULL)
+	    {
+		printf("%d--->",temp1->data);
+		temp1=temp1->next;
+	    }
+	}
+
+}
+
+
+
