@@ -1,0 +1,111 @@
+#include <stdio.h>
+#include<stdlib.h>
+typedef struct node
+{
+    int data;
+    struct node *next;
+}node;
+node *head =NULL;
+node *temp = NULL;
+node*getnode();
+void insert_beg();
+void insert_end();
+void insert_pos();
+void length();
+void display();
+void main()
+{
+    int a;
+    while(1)
+    {
+        printf("enter your  option to insert a node : ");
+        scanf("%d",&a);
+        switch(a){
+            case(1) : printf("insert at begging :");
+                        insert_beg();
+                        break;
+            case(2) : printf("insert at the end : ");
+                        insert_end();
+                        break;
+            case(3) : printf("insert at the position : ");
+                        insert_pos();
+                        break;
+            case(4) : printf("the elements in the node : ");
+                        display();
+                        break;
+            case(5) : if(head==NULL)
+                        printf("the list is empty");
+                      else if(head->next==NULL)
+                        printf("the list has one node  ");
+                      else
+                        length();
+                        break;
+            case(6) : exit(0);
+                        break;
+                        
+            
+        }
+    }
+}void insert_beg()
+{
+    node *new = getnode();
+    new->next = head;
+    head = new;
+}
+node *getnode()
+{
+    node *new = (node*)malloc(sizeof(node));
+    printf("enter data : ");
+    scanf("%d",&new->data);
+    new->next= NULL;
+    return new;
+}void insert_end()
+{
+    node *new= getnode();
+    if(head==NULL)
+    temp = head = new;
+    node *temp = head;
+    while(temp->next!=NULL)
+    {
+        temp= temp->next;
+    }
+    temp->next=new;
+    new->next=NULL;
+
+     
+}void display()
+{
+    node *curr = head;
+    while(curr!=NULL)
+    {
+        printf(" %d ",curr->data);
+        curr = curr->next;
+    }
+}void length()
+{
+    
+    int count = 0;
+    temp = head;
+    while(temp!=0)
+    {
+        count++;
+        temp = temp->next;
+    } 
+    printf("%d",count);
+}void insert_pos()
+{    
+    int i,k;
+    printf("enter your position");
+    scanf("%d",&k);
+    node *new = getnode();
+    temp=head;
+    for(i=1;i<=k;i++)
+    {
+        temp= temp->next; 
+    }
+        new->next = temp->next;
+        temp->next = new;
+    
+}
+
+
