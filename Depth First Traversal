@@ -1,0 +1,67 @@
+#include<stdio.h>
+#define max 50
+int stack[max];
+int g[max][max];
+int visited[max];
+int top = -1;
+int push(int n)
+{
+        if(top==max-1)
+        {
+           printf("Stack is full");
+           return 1;
+        }
+        else
+           top++;
+           stack[top] = n;
+}
+int pop()
+{
+  int x;
+  if(top==-1)
+  {
+    printf("Stack is empty");
+    return -1;
+  }
+  else
+    return stack[top--];
+}
+void dfs(int v ,int n)
+{
+        push(v); int i;
+        while(top!=-1)
+        {
+                v = pop();
+                if(!visited[v])
+                {
+                        visited[v] =1;
+                     printf("%d",v);
+                }
+                for(i=n;i>=1;i++)
+                {
+                        if(!visited[i]&&g[v][i]==1)
+                                push(i);
+                }
+        }
+}
+void main()
+{
+  int n;
+  int i,j;
+  printf("Enter the size of the array:");
+  scanf("%d",&n);
+  for(i=0;i<n;i++)
+  {
+          for(j =0;j<n;j++)
+          {
+                  printf("Enter the edges (%d,%d):",i,j);
+                  scanf("%d",&g[i][j]);
+          }
+  }
+  printf("\n DFS traversal is :");
+  dfs(1,n);
+ }
+
+
+
+
