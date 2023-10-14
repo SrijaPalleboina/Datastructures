@@ -1,0 +1,98 @@
+
+#include <stdio.h>
+#include<stdlib.h>
+typedef struct node
+{
+  int data;
+  struct node *next;
+}node;
+node *head = NULL;
+node *temp = NULL;
+node *getnode()
+{
+   node *new = (node*)malloc(sizeof(node));
+   printf("\nenter the data");
+   scanf("%d",&new->data);
+   new->next = NULL;
+   return new;
+}
+void insert_beg()
+{
+  node *new= getnode();
+  new->next = head;
+  head = new;
+}
+void insert_end()
+{
+  node *new = getnode();
+ if(head ==NULL)
+ {
+   head = new;
+   temp = new;
+ }
+ else
+ {
+    temp = head;
+  while(temp->next!=NULL)
+  {
+    temp = temp->next;
+  }
+  
+    temp->next = new;
+     new ->next = NULL;
+  }
+}
+int get_node()
+{
+  int count = 1;
+  int n;
+  node *curr = head;
+  printf("\nEnter  the value n :");
+  scanf("%d",&n);
+  while(curr!=NULL)
+  {
+   if(count == n)
+        printf("%d",curr->data);
+    count++;
+    curr = curr->next;
+  }
+}
+void display()
+{
+  node *current = head;
+  while(current!=NULL)
+  {
+    printf("%3d",current->data);
+    current = current->next;
+
+  }
+}
+int main()
+{
+  int a;
+  while(1)
+  {
+    printf("\nEnter your option ");
+    scanf("%d",&a);
+    switch(a)
+    {
+        case 1: printf("Insertion at beggining");
+                insert_beg();
+                break;
+        case 2 : printf("Insertion at end");
+                 insert_end();
+                 break;
+        case 3 : printf("NTH Node");
+                get_node();
+                break;
+       case 4: printf("Display");
+                       display();
+                       break;
+    }
+  }
+}
+
+
+
+
+
