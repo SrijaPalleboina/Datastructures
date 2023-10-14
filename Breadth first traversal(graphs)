@@ -1,0 +1,72 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define MAX 5
+int q[MAX];
+int G[MAX][MAX];
+int visited[MAX]={0};
+int front=-1;
+int rear=-1;
+int s;
+void enqueue(int);
+int dequeue();
+void display();
+int isfull() {
+        if(front==0&&rear==MAX-1) {
+                return 1;
+        } else {
+                return 0;
+        }
+}
+int isempty() {
+        if(front==-1&&rear==-1) {
+                return 1;
+        } else {
+                return 0;
+        }
+}
+void enqueue(int x) {
+        if(isfull()==1) {
+                printf("queue is full");
+        } else {
+                rear++;
+                q[rear]=x;
+        }
+}
+int dequeue() {
+        int x;
+        if(isempty()==1) {
+                printf("queue is empty");
+        } else {
+                x = q[front];
+                front++;
+        }
+        return x;
+}
+void BFT(int G[MAX][MAX],int s) {
+        int n,u;
+        visited[s]=1;
+        enqueue(s);
+        while(isempty()!=1) {
+                u=dequeue();
+                for(int i=1;i<=n;i++) {
+                        if(visited[i]!=1&&G[u][i]==1) {
+                                printf("%d",i);
+                                enqueue(i);
+                                visited[i]=1;
+                        }
+                }
+        }
+}
+void main() {
+        int n,i,j;
+        printf("Enter any value of n:");
+        scanf("%d",&n);
+        for(i=0;i<n-1;i++) {
+                for(j=0;j<n-1;j++) {
+                        printf("\nEnter the edge(%d %d)",i+1,j+1);
+                        scanf("%d",&G[i][j]);
+                }
+        }
+        BFT(G,1);
+}
+
